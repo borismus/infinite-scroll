@@ -1,0 +1,22 @@
+body {
+  overflow: hidden;
+}
+
+#list {
+}
+
+.list-content {
+  width: 200px;
+  height: 400px;
+  position: relative;
+  overflow: scroll;
+}
+
+.list-force-height {
+  position: absolute;
+  border: 1px transparent solid;
+}
+
+.list-items > * {
+  position: absolute;
+}
