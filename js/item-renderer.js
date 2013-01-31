@@ -22,7 +22,7 @@ function ImageRenderer() {
 }
 
 ImageRenderer.prototype.getHeight = function() {
-  return 130;
+  return 145;
 };
 
 function FitIntoSquare(  w,  h,  dst_size ) {
@@ -48,7 +48,8 @@ ImageRenderer.prototype.render = function(data, el) {
   var ctx = canvas.getContext('2d');
   var img = new Image();
   var canvas_size = 180;
-  canvas.width = canvas.height = canvas_size;
+  canvas.width = canvas_size;
+  canvas.height = canvas_size * bb.h/bb.w;
   img.src = data.imageUrl;
 
 
