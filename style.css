@@ -1,17 +1,22 @@
-body {
+html, body {
+  height: 100%;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 #list {
 }
 
 .list-content {
-  width: 200px; /* scroll bar width + canvas width */
-  height: 1000px;
-  position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0px;
+  border:solid 1px #000000;
+  top: 20px;
+  bottom: 10px;
+  position: absolute;
+  width: 100%;
 }
 
 .list-force-height {
@@ -45,20 +50,18 @@ body {
   min-height:28px;
 }
 
-html, body {
-    height: 100%;
-}
 .flex-container {
-    display: -webkit-flex;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-align-self: center;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-align-self: center;
 }
 
 .flex-item {
-    margin: 5px;
-    -webkit-flex: 1;
-    flex: 1;
-    text-align: center;
+  margin: 5px;
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: center;
+  position: relative;
 }
