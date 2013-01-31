@@ -8,11 +8,9 @@ SimpleRenderer.prototype.getHeight = function() {
   return 30;
 };
 
-SimpleRenderer.prototype.render = function(data) {
-  var el = document.createElement('div');
+SimpleRenderer.prototype.render = function(data, el) {
   el.classList.add('item');
   el.innerHTML = 'Hello';
-  return el;
 }
 
 /**
@@ -67,6 +65,6 @@ ImageRenderer.prototype.render = function(data, callback) {
     ctx.font = '30pt Verdana';
     ctx.fillText(data.index, 10, 40);
     ctx.strokeText(data.index, 10, 40);
-    callback(canvas);
+    if(typeof(callback)=='function') callback(canvas);
   }
 }
