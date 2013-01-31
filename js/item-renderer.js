@@ -38,14 +38,19 @@ function FitIntoSquare(  w,  h,  dst_size ) {
   return {w:dst_w, h:dst_h};
 }
 
-ImageRenderer.prototype.render = function(data, callback) {
-  var canvas = document.createElement('canvas');
+ImageRenderer.prototype.render = function(data, el) {
+  var bb = data.boundingBox;
+  var canvas = el.querySelector('canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    el.appendChild(canvas);
+  }
   var ctx = canvas.getContext('2d');
   var img = new Image();
-  img.src = data.imageUrl;
-  var bb = data.boundingBox;
   var canvas_size = 180;
   canvas.width = canvas.height = canvas_size;
+  img.src = data.imageUrl;
+
 
   img.onload = function() {
     if (data.renderMode == 'crop') {
@@ -60,11 +65,11 @@ ImageRenderer.prototype.render = function(data, callback) {
       var h=dst.h*bb.h/img.height;
       ctx.strokeRect(x,y,w,h);
     }
+    // draw a number
     ctx.fillStyle = 'white';
     ctx.strokeStyle = 'black';
     ctx.font = '30pt Verdana';
     ctx.fillText(data.index, 10, 40);
     ctx.strokeText(data.index, 10, 40);
-    if(typeof(callback)=='function') callback(canvas);
   }
 }
