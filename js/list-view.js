@@ -14,6 +14,9 @@ function ListView(opts) {
   this.scheduleRender();
 
   this.EXTRA_PADDING = 200;
+
+  // Array of elements to reuse.
+  this.elements = [];
 }
 
 
@@ -70,7 +73,7 @@ ListView.prototype.scheduleRender = function() {
  */
 ListView.prototype.render = function() {
   // TODO: Be smarter about reusing existing items to prevent flicker.
-  this.itemsEl.innerHTML = '';
+  //this.itemsEl.innerHTML = '';
   // Get the list's current viewport (scrollTop, height).
   var pxOffset = this.contentEl.scrollTop;
   var pxLimit = this.contentEl.offsetHeight + this.EXTRA_PADDING;
@@ -78,20 +81,32 @@ ListView.prototype.render = function() {
   var itemHeight = this.itemRenderer.getHeight();
   var offset = parseInt(pxOffset / itemHeight);
   var limit = parseInt(pxLimit / itemHeight);
+
+  // Create all of the elements necessary for this view if they don't exist yet.
+  this._createElements(limit);
+
   // Fetch the items and render them.
   var itemData = this.dataAdapter.getItems(offset, limit, this.isReversed);
+
   for (var i = 0; i < itemData.length; i++) {
     var item = itemData[i];
     var top = (offset + i) * itemHeight;
-    (function(top) {
-      var el = this.itemRenderer.render(item, function(el) {
-        el.style.top = top + 'px';
-        this.itemsEl.appendChild(el);
-      }.bind(this));
-    }.bind(this))(top);
+    var el = this.elements[i];
+    el.style.top = top + 'px';
+    this.itemRenderer.render(item, el);
   }
-  itemData.forEach(function(item) {
-  }.bind(this));
+};
+
+ListView.prototype._createElements = function(count) {
+  // If the elements exist already, no need to do anything.
+  if (this.elements.length >= count) {
+    return;
+  }
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('div');
+    this.itemsEl.appendChild(el);
+    this.elements.push(el);
+  }
 };
 
 /**
@@ -115,4 +130,8 @@ ListView.prototype._onScroll = function(e) {
 ListView.prototype._onSort = function(e) {
   this.isReversed = !this.isReversed;
   this.render();
+};
+
+ListView.prototype.error = function(msg) {
+  console.error(msg);
 };

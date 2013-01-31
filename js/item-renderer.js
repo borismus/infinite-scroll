@@ -8,11 +8,9 @@ SimpleRenderer.prototype.getHeight = function() {
   return 30;
 };
 
-SimpleRenderer.prototype.render = function(data) {
-  var el = document.createElement('div');
+SimpleRenderer.prototype.render = function(data, el) {
   el.classList.add('item');
   el.innerHTML = 'Hello';
-  return el;
 }
 
 /**
@@ -27,10 +25,14 @@ ImageRenderer.prototype.getHeight = function() {
   return 130;
 };
 
-ImageRenderer.prototype.render = function(data, callback) {
+ImageRenderer.prototype.render = function(data, el) {
   if (data.renderMode == 'crop') {
     var bb = data.boundingBox;
-    var canvas = document.createElement('canvas');
+    var canvas = el.querySelector('canvas');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      el.appendChild(canvas);
+    }
     var ctx = canvas.getContext('2d');
 
     var img = new Image();
@@ -45,7 +47,6 @@ ImageRenderer.prototype.render = function(data, callback) {
       ctx.font = '30pt Verdana';
       ctx.fillText(data.index, 10, 40);
       ctx.strokeText(data.index, 10, 40);
-      callback(canvas);
     }
   }
 }
