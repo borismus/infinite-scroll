@@ -4,7 +4,8 @@
  * - getLength()
  * - getItems(offset, limit, opt_reverse)
  */
-function DataAdapter() {
+function DataAdapter(mode) {
+  this.mode = mode;
 }
 
 DataAdapter.prototype.getLength = function() {
@@ -34,6 +35,6 @@ DataAdapter.prototype._createItem = function(index) {
       w: 160,
       h: 120
     },
-    renderMode: 'frame' // Can also be 'frame'.
+    renderMode: this.mode?this.mode:'frame' // Can also be 'frame'.
   };
 };

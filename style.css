@@ -6,7 +6,7 @@ body {
 }
 
 .list-content {
-  width: 172px; /* scroll bar width + canvas width */
+  width: 200px; /* scroll bar width + canvas width */
   height: 400px;
   position: relative;
   overflow-y: scroll;

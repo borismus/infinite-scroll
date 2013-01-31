@@ -46,7 +46,7 @@ ImageRenderer.prototype.render = function(data, callback) {
   var img = new Image();
   img.src = data.imageUrl;
   var bb = data.boundingBox;
-  var canvas_size = 160;
+  var canvas_size = 180;
   canvas.width = canvas.height = canvas_size;
 
   img.onload = function() {
@@ -61,7 +61,6 @@ ImageRenderer.prototype.render = function(data, callback) {
       var w=dst.w*bb.w/img.width;
       var h=dst.h*bb.h/img.height;
       ctx.strokeRect(x,y,w,h);
-
     }
     ctx.fillStyle = 'white';
     ctx.strokeStyle = 'black';
