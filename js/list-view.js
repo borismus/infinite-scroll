@@ -90,8 +90,7 @@ ListView.prototype.render = function() {
       }.bind(this));
     }.bind(this))(top);
   }
-  itemData.forEach(function(item) {
-  }.bind(this));
+  itemData.forEach(function(item) {}.bind(this));
 };
 
 /**

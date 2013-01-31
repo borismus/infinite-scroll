@@ -34,6 +34,6 @@ DataAdapter.prototype._createItem = function(index) {
       w: 160,
       h: 120
     },
-    renderMode: 'crop' // Can also be 'frame'.
+    renderMode: 'frame' // Can also be 'frame'.
   };
 };

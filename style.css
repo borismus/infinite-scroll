@@ -6,20 +6,24 @@ body {
 }
 
 .list-content {
-  width: 200px;
+  width: 172px; /* scroll bar width + canvas width */
   height: 400px;
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
+  margin: 0px;
 }
 
 .list-force-height {
   position: absolute;
   border: 1px transparent solid;
+  margin: 0px;
 }
 
 .list-items > * {
   position: absolute;
+  margin: 0px;
+  padding: 0px;
 }
 
 
@@ -44,4 +48,9 @@ body {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.4); 
+}
+
+.vert-list {
+  margin: 20px;
+  display: inline-block;
 }
